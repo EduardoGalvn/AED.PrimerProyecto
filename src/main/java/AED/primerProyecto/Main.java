@@ -11,8 +11,7 @@ public class Main {
 		
 		System.out.println("¿Con qué base de datos desea conectarse?\n" +
 				"1. MySQL\n"+
-				"2. SQL Server\n"+
-				"3. Base\n");
+				"2. SQL Server\n");
 				v1 = scanner.nextInt();
 				
 				switch(v1){
@@ -23,8 +22,6 @@ public class Main {
 					case 2:
 						ConexionSQLServer.conectarSQLServer();
 						break;
-					case 3:
-						//Conexion a base
 				}
 			
 				boolean menu = true;
@@ -46,7 +43,7 @@ public class Main {
 								Insertar.insertar();
 								break;
 							case 3:
-								System.out.println("No está implementado.");
+								Modificar.modificar();
 								break;
 							case 4:
 								Eliminar.eliminar();

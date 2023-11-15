@@ -21,9 +21,5 @@ public class ConexionMySQL {
 
         return conn;
     }
-    
-    public Connection conn = ConexionMySQL.conectarMySQL();
-	
-	public String sentencia = "Select * from productos";
 
 }

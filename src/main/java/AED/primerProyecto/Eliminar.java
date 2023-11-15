@@ -77,23 +77,21 @@ public class Eliminar {
 				System.out.println("Valor de decide: [" + decide + "]");
 				if (decide.trim().equalsIgnoreCase("Y") || decide.trim().equalsIgnoreCase("y")) {
 				    try (Connection con = ConexionMySQL.conectarMySQL()) {
-				        con.setAutoCommit(false); // Desactivar el autocommit para gestionar la transacción manualmente
+				        con.setAutoCommit(false);
 
 				        try (PreparedStatement sentStock = con.prepareStatement("DELETE FROM stock WHERE Codproducto = ?")) {
 				            sentStock.setInt(1, eliminar);
 				            sentStock.executeUpdate();
 				        } catch (SQLException e) {
-				            con.rollback(); // Deshacer la transacción en caso de error
 				            e.printStackTrace();
 				        }
 				        try (PreparedStatement sentProductos = con.prepareStatement("DELETE FROM productos WHERE Codproducto = ?")) {
 				            sentProductos.setInt(1, eliminar);
 				            sentProductos.executeUpdate();
 				        } catch (SQLException e) {
-				            con.rollback(); // Deshacer la transacción en caso de error
 				            e.printStackTrace();
 				        }
-				        con.commit(); // Confirmar la transacción
+				        con.commit();
 				        System.out.println("Producto eliminado correctamente.");
 				    } catch (SQLException e) {
 				        e.printStackTrace();
