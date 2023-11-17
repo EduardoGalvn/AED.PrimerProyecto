@@ -24,7 +24,7 @@ public class Eliminar {
 		String consulta = "select productos.*, Denofamilia from productos inner join "
 				+ "familia on familia.Codfamilia = productos.Codfamilia order by Codproducto";
 		try {
-			Connection conn = ConexionMySQL.conectarMySQL();
+			Connection conn = Database.getConnection();
 			Statement sentencia = conn.createStatement();
 			ResultSet resultado = sentencia.executeQuery(consulta);
 
@@ -61,7 +61,7 @@ public class Eliminar {
 
 		String compruebaStock = "select Codproducto from Stock where Codproducto = " + eliminar;
 		try {
-			Connection conn = ConexionMySQL.conectarMySQL();
+			Connection conn = Database.getConnection();
 			Statement sentencia = conn.createStatement();
 			ResultSet result = sentencia.executeQuery(compruebaStock);
 
@@ -76,7 +76,7 @@ public class Eliminar {
 
 				System.out.println("Valor de decide: [" + decide + "]");
 				if (decide.trim().equalsIgnoreCase("Y") || decide.trim().equalsIgnoreCase("y")) {
-				    try (Connection con = ConexionMySQL.conectarMySQL()) {
+				    try (Connection con = Database.getConnection()) {
 				        con.setAutoCommit(false);
 
 				        try (PreparedStatement sentStock = con.prepareStatement("DELETE FROM stock WHERE Codproducto = ?")) {
@@ -101,7 +101,7 @@ public class Eliminar {
 				}
 			} else {
 				try {
-					Connection con = ConexionMySQL.conectarMySQL();
+					Connection con = Database.getConnection();
 					PreparedStatement sent = con.prepareStatement("delete from productos where Codproducto = ?");
 					sent.setInt(1, eliminar);
 					sent.executeUpdate();

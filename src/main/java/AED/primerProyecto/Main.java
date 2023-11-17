@@ -6,60 +6,60 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		int v2;
-		int v1;
+		
 		
 		System.out.println("¿Con qué base de datos desea conectarse?\n" +
 				"1. MySQL\n"+
 				"2. SQL Server\n");
-				v1 = scanner.nextInt();
-				
-				switch(v1){
+		int opcionBD = scanner.nextInt();
+		
+		switch(opcionBD){
+			case 1:
+				Database.setDatabase(new DatabaseMySQL());
+				break;
+			case 2:
+				Database.setDatabase(new DatabaseSQLServer());
+				break;
+		}
+	
+		boolean menu = true;
+		while(menu == true) {
+			System.out.println("""
+				¿Qué desea hacer?
+				1. Visualizar los productos
+				2. Insertar un producto
+				3. Actualizar
+				4. Eliminar
+				5. Cerrar conexion
+				""");
+			if (scanner.hasNextInt()) {
+				int opcionMenu = scanner.nextInt();
+				switch(opcionMenu){
 				
 					case 1:
-						ConexionMySQL.conectarMySQL();
+						Visualizar.visualizar();
 						break;
 					case 2:
-						ConexionSQLServer.conectarSQLServer();
+						Insertar.insertar();
 						break;
-				}
-			
-				boolean menu = true;
-				while(menu == true) {
-					System.out.println("\n¿Qué desea hacer?\n" +
-						"1. Visualizar los productos\n"+
-						"2. Insertar un producto\n"+
-						"3. Actualizar\n"+
-						"4. Eliminar\n"+
-						"5. Cerrar conexion");
-					if (scanner.hasNextInt()) {
-						v2 = scanner.nextInt();
-						switch(v2){
-						
-							case 1:
-								Visualizar.visualizar();
-								break;
-							case 2:
-								Insertar.insertar();
-								break;
-							case 3:
-								Modificar.modificar();
-								break;
-							case 4:
-								Eliminar.eliminar();
-								break;
-							case 5:
-								System.out.println("Adiós 👋");
-								menu = false;
-								break;
-							default:
-		                        System.out.println("Opción no válida. Por favor, ingrese un número del 1 al 5.");
-		                        break;
-				        }
-					}
-				}
+					case 3:
+						Modificar.modificar();
+						break;
+					case 4:
+						Eliminar.eliminar();
+						break;
+					case 5:
+						System.out.println("Adiós 👋");
+						menu = false;
+						break;
+					default:
+                        System.out.println("Opción no válida. Por favor, ingrese un número del 1 al 5.");
+                        break;
+		        }
+			}
+		}
 					
-			scanner.close();
+		scanner.close();
 	}		
 }
 

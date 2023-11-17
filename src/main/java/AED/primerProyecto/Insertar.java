@@ -50,7 +50,7 @@ public class Insertar {
 		
 // Visualizamos las familias y sus codigos		
 		try {
-			Connection conn = ConexionMySQL.conectarMySQL();
+			Connection conn = Database.getConnection();
 			Statement sentencia = conn.createStatement();
 			ResultSet resultado = sentencia.executeQuery(consulta);
 			
@@ -108,7 +108,7 @@ public class Insertar {
 		
 		
 		try {
-			Connection conn = ConexionMySQL.conectarMySQL();
+			Connection conn = Database.getConnection();
 			PreparedStatement sentencia = conn.prepareStatement("INSERT INTO productos (Denoproducto, PrecioBase, Codfamilia, Congelado)"
 																+" VALUES (?, ?, ?, ?)");
 			

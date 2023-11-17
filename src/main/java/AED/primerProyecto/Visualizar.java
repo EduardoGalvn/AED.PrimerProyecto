@@ -12,7 +12,7 @@ public class Visualizar {
 		String consulta = "select productos.*, Denofamilia from productos inner join "
 				+"familia on familia.Codfamilia = productos.Codfamilia order by Codproducto";
 		try {
-			Connection conn = ConexionMySQL.conectarMySQL();
+			Connection conn = Database.getConnection();
 	        Statement sentencia = conn.createStatement();
 	        ResultSet resultado = sentencia.executeQuery(consulta);
 	        
@@ -20,7 +20,7 @@ public class Visualizar {
 	        while (resultado.next()) {
 	        System.out.println("|  " + resultado.getInt(1) + " | " + resultado.getString(2) + " | " + 
 	        					resultado.getDouble(3) + " | " + resultado.getInt(4) + " | " +
-	        					resultado.getInt(5) + " | " + resultado.getString(6) + " | ");
+	        					resultado.getBoolean(5) + " | " + resultado.getString(6) + " | ");
 	    	}
 	    	
 	        System.out.println("|— — — — — — — — — — — — — — — — — — — — — — — —|");
